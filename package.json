@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "updates": "npm-check-updates -u",
-    "build": "NODE_ENV=production rimraf dist && webpack --config webpack.config/webpack.prod.js",
-    "dev": "NODE_ENV=development  webpack --config webpack.config/webpack.dev.js"
+    "base": "webpack --config webpack.conf/webpack.base.js",
+    "build": "NODE_ENV=production webpack --config webpack.conf/webpack.prod.js",
+    "dev": "NODE_ENV=development webpack --config webpack.conf/webpack.dev.js"
   },
   "repository": {
     "type": "git",
