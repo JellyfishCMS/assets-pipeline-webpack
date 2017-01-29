@@ -1,10 +1,12 @@
+const path = require('path')
+
 module.exports = {
-  test: /\.js$/,,
+  test: /\.js$/,
     // The Condition must match.
     // The convention is the provide a RegExp or array of RegExps here, but it's not enforced.
 
 
-  //include: [],
+  include: path.resolve(__dirname),
     // The Condition must match.
     // The convention is the provide a RegExp or array of RegExps here, but it's not enforced.
 
