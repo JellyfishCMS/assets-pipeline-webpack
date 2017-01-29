@@ -1,27 +1,29 @@
 'use strict'
 const path = require('path')
 const webpack = require('webpack')
+
+// configuration file
 const config = require('./config')
 
 /**
 ** WEBPACK configuration object
 ****************************/
 let webpack_base = {
-  entry: config.entry,
+  entry: config.entry, // string | array | object
     // Here the application starts executing and webpack starts bundling
 
   output: {
-    path: config.output_path, // string,
+    path: config.output_path, // string
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
 
-    filename: config.debug ? '[name].js' : '[name].[chunkhash:8].js', // string,
+    filename: config.debug ? '[name].js' : '[name].[chunkhash:8].js', // string
     // the filename template for entry chunks
 
-    publicPath: config.output_publicPath, // string,
+    publicPath: config.output_publicPath, // strin
     // the url to the output directory resolved relative to the HTML page
 
-    //library: "MyLibrary", // string,
+    //library: "MyLibrary", // string
     // the name of the exported library
 
     //libraryTarget: "umd", // enum

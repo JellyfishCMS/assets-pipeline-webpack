@@ -1,8 +1,5 @@
-const context = '../../jellyfish-themes/jellyfish-tests/' // Where does project located relatively to the assets-pipeline-webpack folder
+const context = '../../jellyfish-themes/jellyfish-tests/' // Where does your project is located relatively to the assets-pipeline-webpack folder?
 
-/**
-* Config Object
-*/
 module.exports = {
 
   /**
@@ -16,7 +13,7 @@ module.exports = {
   ** APPLIATION I/O
   ****************************/
   entry: {                                                // Where are the entry point files of your application?
-    app: [                                                // string | object | array
+    app: [
       //context + 'src/css/app.css',                      //# In stage0 we don't have yet the appropriated loader
       context + 'src/js/app.js'
     ]
