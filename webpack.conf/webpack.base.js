@@ -8,6 +8,7 @@ const config = require('./config')
 // loaders configurations
 const babelLoader = require('../webpack.mod/babel-loader')
 const cssLoader   = require('../webpack.mod/css-loader')
+const imageLoader = require('../webpack.mod/image-loader')
 
 /**
 ** WEBPACK configuration object
@@ -42,7 +43,8 @@ let webpack_base = {
     rules: [
       // rules for modules (configure loaders, parser options, etc.)
       babelLoader,
-      cssLoader
+      cssLoader,
+      imageLoader
     ]
   },
     // modules and loaders

@@ -1,30 +1,29 @@
-const path = require('path')
-
 module.exports = {
-  test: /\.js$/,
+  test: /\.(jpe?g|png|gif|svg)$/i,
     // The Condition must match.
     // The convention is the provide a RegExp or array of RegExps here, but it's not enforced.
 
-
-  include: path.resolve(__dirname, '..'),
+  //include: [],
     // The Condition must match.
     // The convention is the provide a RegExp or array of RegExps here, but it's not enforced.
-
 
   exclude: [/node_modules/, /libs/, /bower_components/],
     // The Condition must match.
     // The convention is the provide a RegExp or array of RegExps here, but it's not enforced.
 
-
   //issuer: { test, include, exclude },
     // conditions for the issuer (the origin of the import)
 
-  enforce: "pre", // ossible values: "pre" | "post"
+  //enforce: "pre", // ossible values: "pre" | "post"
     // flags to apply these rules
 
-  loader: "babel-loader",
+  loader: "url-loader",
     // the loader which should be applied, it'll be resolved relative to the context
 
   options: { },
     // options for the loader
+
+  //use: [],
+    // apply multiple loaders and options
+
 }

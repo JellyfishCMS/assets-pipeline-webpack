@@ -67,3 +67,20 @@ module.exports = {
     // options for the loader
 }
 ```
+
+## What is the next Step?
+
+In this stage I have implemented several loaders:
+
+* babel: write JavaScript from the future and don't worry about compatibility
+* css: two loader that let you bundle your css
+* image: bundle your images
+
+You must have notice that webpack is putting everything that we define in our module in the same file. **This is absolutely not what we want in production.**
+
+However it is very practical when it comes to the development phase, because we can use a technology called Hot Module Replacement (HMR). Webpack will provide us a web server that will dynamically replace what have change in our application when we save our files. This is very fast an et you se you application evolve in real tie without reloading you browser.
+
+As a result we will **define two configurations**:
+
+* **A development configuration** with webpack-dev-server
+* **A Production configuration** that will publish and optimize our assets
