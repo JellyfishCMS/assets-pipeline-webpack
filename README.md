@@ -11,6 +11,7 @@ Fortunately, this repository is a set of stater Webpack configuration. And also 
 The repository contains a tutorial divided in several stage. As you go from stage to stage, are more complex configuration is available, which means more feature to help you in you development. Each stage is stored on a separated branch on github, so just checkout to the next stage to progress in the tutorial or to jump directly to the configuration and the features you need.
 
 * [Stage 0: Basic Webpack Configuration](https://github.com/JellyfishCMS/assets-pipeline-webpack/blob/master/documentation/stage0.md)
+* [Stage 1: Introduction to Loaders](https://github.com/JellyfishCMS/assets-pipeline-webpack/blob/master/documentation/stage1.md)
 
 ## Settup
 
@@ -33,3 +34,17 @@ Here is the list of script you can run:
 |`npm run base`  | [Stage 0] | Publish you JavaScript file(s) taking into account the dependencies|
 |`npm run build` | [Stage 1] | Publish your assets to be ready in production|
 |`npm run dev`   | [Stage 2] | Run the development server and activate the Hot module replacement (HRM)|
+
+## Conventions
+
+* `webpack.conf` folder contains our different configurations
+  * We are using a `config.js` file to define some global variable for our Webpack configuration.
+  * All configuration use `webpack.base.js` and programmatically modify the **JavaScript Object** he provides.
+  * `webpack.default.js` contain a boilerplate to start a new configuration
+* `webpack.mod` folder contains our loaders/plugins configurations
+  * `default-loader.js` contain a commented boilerplate to start a new configuration
+
+## Create our own configuration
+
+* `webpack.default.js` contain a boilerplate to start a new Webpack configuration
+* `default-loader.js` contain a commented boilerplate to start a new loader configuration
