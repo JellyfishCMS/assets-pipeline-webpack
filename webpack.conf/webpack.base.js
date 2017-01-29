@@ -7,6 +7,7 @@ const config = require('./config')
 
 // loaders configurations
 const babelLoader = require('../webpack.mod/babel-loader')
+const cssLoader   = require('../webpack.mod/css-loader')
 
 /**
 ** WEBPACK configuration object
@@ -20,7 +21,7 @@ let webpack_base = {
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
 
-    filename: config.debug ? '[name].js' : '[name].[chunkhash:8].js', // string
+    filename: config.debug ? '[name].js' : '[name].js', // string
     // the filename template for entry chunks
 
     publicPath: config.output_publicPath, // strin
@@ -40,7 +41,8 @@ let webpack_base = {
   module: {
     rules: [
       // rules for modules (configure loaders, parser options, etc.)
-      babelLoader
+      babelLoader,
+      cssLoader
     ]
   },
     // modules and loaders
