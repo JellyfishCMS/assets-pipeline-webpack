@@ -10,6 +10,7 @@ const NpmInstallPlugin = require('npm-install-webpack2-plugin')
 
 // loaders configurations
 const babelLoader = require('../webpack.mod/babel-loader')
+const cssLoader   = require('../webpack.mod/css-loader')
 
 /**
 ** WEBPACK configuration object
@@ -42,8 +43,9 @@ let webpack_base = {
 
   module: {
     rules: [
-      babelLoader
-      // ...
+      // rules for modules (configure loaders, parser options, etc.)
+      babelLoader,
+      cssLoader
     ]
   },
     //> modules and loaders

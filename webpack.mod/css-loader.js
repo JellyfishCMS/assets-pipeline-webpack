@@ -1,5 +1,5 @@
 module.exports = {
-  test: '',
+  test: /\.css$/,
     // The Condition must match.
     // The convention is the provide a RegExp or array of RegExps here, but it's not enforced.
 
@@ -14,16 +14,18 @@ module.exports = {
   //issuer: { test, include, exclude },
     // conditions for the issuer (the origin of the import)
 
-  enforce: "pre", // ossible values: "pre" | "post"
+  //enforce: "pre", // ossible values: "pre" | "post"
     // flags to apply these rules
 
-  loader: "",
+  //loader: "",
     // the loader which should be applied, it'll be resolved relative to the context
 
-  options: { },
+  //options: { },
     // options for the loader
 
-  //use: [],
+  use: [
+    { loader: "style-loader" },
+    { loader: "css-loader" },
+  ]
     // apply multiple loaders and options
-
 }
