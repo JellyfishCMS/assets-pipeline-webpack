@@ -5,6 +5,9 @@ const webpack = require('webpack')
 // configuration file
 const config = require('./config')
 
+// loaders configurations
+const babelLoader = require('../webpack.mod/babel-loader')
+
 /**
 ** WEBPACK configuration object
 ****************************/
@@ -34,7 +37,12 @@ let webpack_base = {
   },
     // options related how webpack emits results
 
-  module: {},
+  module: {
+    rules: [
+      // rules for modules (configure loaders, parser options, etc.)
+      babelLoader
+    ]
+  },
     // modules and loaders
 
   resolve: {
