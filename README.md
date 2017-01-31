@@ -11,7 +11,21 @@ Fortunately, this repository is a set of stater Webpack configuration. And also 
 The repository contains a tutorial divided in several stage. As you go from stage to stage, are more complex configuration is available, which means more feature to help you in you development. Each stage is stored on a separated branch on github, so just checkout to the next stage to progress in the tutorial or to jump directly to the configuration and the features you need.
 
 * [Stage 0: Basic Webpack Configuration](https://github.com/JellyfishCMS/assets-pipeline-webpack/blob/master/documentation/stage0.md)
+  * Use Webpack as a JavaScript Bundler
+  * Commented Webpack configuration `webpack.conf/webpack.base.js`
+  * command line -> `npm run base`
 * [Stage 1: Introduction to Loaders](https://github.com/JellyfishCMS/assets-pipeline-webpack/blob/master/documentation/stage1.md)
+  * Use Webpack as a JavaScript, Css, images, and Sass Bundler
+  * Commented loaders configuration `webpack.mod/_default-loader.js`
+  * command line -> `npm run base`
+* [Stage 2: Dev Configuration](https://github.com/JellyfishCMS/assets-pipeline-webpack/blob/master/documentation/stage2.md)
+  * Use webpack-dev-server and its HMR (Hot module reload) function
+  * Commented Webpack dev configuration `webpack.conf/webpack.dev.js`
+  * command line -> `npm run dev`
+* [Stage 3: Build Configuration](https://github.com/JellyfishCMS/assets-pipeline-webpack/blob/master/documentation/stage3.md)
+  * Publish you assets optimize for production (optimization)
+  * Commented Webpack build configuration `webpack.conf/webpack.build.js`
+  * command line -> `npm run build`
 
 ## Settup
 
