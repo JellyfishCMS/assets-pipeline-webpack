@@ -9,9 +9,11 @@ const config = require('../config')
 const NpmInstallPlugin = require('npm-install-webpack2-plugin')
 
 // loaders configurations
-const babelLoader = require('../webpack.mod/babel-loader')
 const cssLoader   = require('../webpack.mod/css-loader')
 const imageLoader = require('../webpack.mod/image-loader')
+// loaders pre-processor configuration
+const babelLoader = require('../webpack.mod/babel-loader')
+const sassLoader = require('../webpack.mod/sass-loader')
 
 /**
 ** WEBPACK configuration object
@@ -47,7 +49,8 @@ let webpack_base = {
       // rules for modules (configure loaders, parser options, etc.)
       babelLoader,
       cssLoader,
-      imageLoader
+      imageLoader,
+      sassLoader
     ]
   },
     //> modules and loaders
