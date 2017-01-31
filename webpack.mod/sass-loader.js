@@ -1,5 +1,5 @@
 module.exports = {
-  test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf|wav)(\?.*)?$/,
+  test: /\.scss$/,
     // The Condition must match.
     // The convention is the provide a RegExp or array of RegExps here, but it's not enforced.
 
@@ -14,19 +14,20 @@ module.exports = {
   //issuer: { test, include, exclude },
     // conditions for the issuer (the origin of the import)
 
-  //enforce: "pre", // ossible values: "pre" | "post"
+  enforce: "pre", // ossible values: "pre" | "post"
     // flags to apply these rules
 
-  loader: "url-loader",
+  //loader: "",
     // the loader which should be applied, it'll be resolved relative to the context
 
-  options: {
-    limit: 10,
-    name: '[name].[hash:7].[ext]'
-  },
+  //options: { },
     // options for the loader
 
-  //use: [],
+  use: [
+    { loader: "style-loader" },
+    { loader: "css-loader" },
+    { loader: "sass-loader" }
+  ],
     // apply multiple loaders and options
 
 }
