@@ -2,24 +2,21 @@ const path = require('path')
 
 module.exports = {
   test: /\.js$/,
-    // The Condition must match.
+    // The Condition must match, so the loaders is used for the given file
     // The convention is the provide a RegExp or array of RegExps here, but it's not enforced.
-
 
   include: path.resolve(__dirname, '..'),
-    // The Condition must match.
+    // The Condition must match, to include the files.
     // The convention is the provide a RegExp or array of RegExps here, but it's not enforced.
-
 
   exclude: [/node_modules/, /libs/, /bower_components/],
-    // The Condition must match.
+    // The Condition must NOT match. Those files are excluded
     // The convention is the provide a RegExp or array of RegExps here, but it's not enforced.
-
 
   //issuer: { test, include, exclude },
     // conditions for the issuer (the origin of the import)
 
-  enforce: "pre", // ossible values: "pre" | "post"
+  enforce: "pre", // possible values: "pre" | "post"
     // flags to apply these rules
 
   loader: "babel-loader",
