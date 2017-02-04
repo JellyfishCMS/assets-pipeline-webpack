@@ -3,7 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 // configuration file
-const config = require('./config')
+const config = require('../config')
 
 // loaders configurations
 const cssLoader   = require('../webpack.mod/css-loader')
@@ -20,14 +20,14 @@ let webpack_base = {
     // Here the application starts executing and webpack starts bundling
 
   output: {
-    path: config.output_path, // string
+    path: path.resolve(__dirname,config.output_path), // string
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
 
     filename: config.debug ? '[name].js' : '[name].js', // string
     // the filename template for entry chunks
 
-    publicPath: config.output_publicPath, // strin
+    publicPath: config.output_publicPath, // string
     // the url to the output directory resolved relative to the HTML page
 
     //library: "MyLibrary", // string
