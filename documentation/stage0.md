@@ -1,14 +1,14 @@
-# WEBPACK configuration stage 0
+# Webpack configuration stage 0
 
 ## Define the basic Webpack configuration
 
-Webpack configuration is define through a **JavaScript Object**. The first step to learn how to use webpack is to get familiar with the configuration options of webpack.
+Webpack configuration is define through a **JavaScript Object**. The first step to learn how to use Webpack is to get familiar with the configuration options of Webpack.
 
-You can refer to the [offical documentation](https://webpack.js.org/configuration/)
+You can refer to the [offical documentation](https://Webpack.js.org/configuration/)
 
 The _jellyfish-assets-pipeline-webpack_ project contain at this stage a standard pre-configure **JavaScript Object** in the file called `webpack.base.js`.
 
-The idea is that this file would be the same for any of our future webpack configuration. When creating a new configuration we would create a new JavaScript file such as `webpack.default.js` and programmatically modify the **JavaScript Object** provided by the `webpack.base.js` file. (We will see how in details in the next Stage of this tutorial).
+The idea is that this file would be the same for any of our future Webpack configuration. When creating a new configuration we would create a new JavaScript file such as `webpack.default.js` and programmatically modify the **JavaScript Object** provided by the `webpack.base.js` file. (We will see how in details in the next Stage of this tutorial).
 
 In addition to that, we will be using a `config.js` file to define some global variable for our Webpack configuration.
 
@@ -16,14 +16,14 @@ This is our file tree structure:
 
 ```
 +- documentation
-+- webpack.conf           // Contains all the available webpack configurations
++- webpack.conf           // Contains all the available Webpack configurations
 `+- config.js             // Used to define our VARIABLES
  +- webpack.base.js       // Our default Webpack configuration Object
  +- webpack.default.js    // Blank Webpack configuration that we will use as a template for the future configurations
- +- ...                   // Another webpack configuration file
+ +- ...                   // Another Webpack configuration file
 ```
 
-## Running webpack
+## Running Webpack
 
 Now it is time to see what Webpack is capable of at this stage. We will be Running our script with npm, so lets have a look to the `package.json` file. In the script section you should see this:
 
@@ -67,7 +67,7 @@ module.exports = 'Hello world!';
 * 3- modify the configuration as following because we want to work in the current directory.
 
 ```
-const context = './' // Where does project located relatively to the assets-pipeline-webpack folder -> Current directory
+const context = './' // Where does project located relatively to the assets-pipeline-Webpack folder -> Current directory
 ```
 
 * 4- run the command line `npm run base`
@@ -78,6 +78,6 @@ const context = './' // Where does project located relatively to the assets-pipe
 
 You have now a bundled JavaScript file browser ready.
 
-Webpack has translated your "node.js" code which was using the concept of modules into a javascript file that can be use browser. Being capable of using modules to manage JavaScript dependencies is great, however it is fare from a true bundle. There is so much more that webpack can do for you.
+Webpack has translated your "node.js" code which was using the concept of modules into a javascript file that can be use browser. Being capable of using modules to manage JavaScript dependencies is great, however it is fare from a true bundle. There is so much more that Webpack can do for you.
 
 We will be discovering those things in the next stages.
