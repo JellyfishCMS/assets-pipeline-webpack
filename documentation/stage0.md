@@ -1,12 +1,34 @@
 # WEBPACK configuration stage 0
 
 * Getting Started
-* Create a basic configuration
+* Creating a basic configuration
   * Directory structure
   * Configuration file
-* Install a plugin
+* Installing a plugin
 * Running Webpack
+* Preparing the next stage configuration
 * Conclusion
+
+## Road Map
+
+At this stage you know:
+
+* [ ] How to install webpack
+* [ ] How to define a default configuration file
+  * [ ] How to define the entry point of your bundles
+  * [ ] How to define the output folder
+  * [ ] How to Add a plugin to your configuration
+* [ ] create a npm shortcut to run webpack via `npm run base`
+
+Your configuration has:
+  * [ ] A `config.js` file with all the variable that you migh change from one project to another
+  * [ ] A `webpack.conf` folder with all you configuration files
+    * [ ] A `webpack.base.js` file that have a pre-configured and commented webpack configuration object inspired from [the official documentation](https://webpack.js.org/configuration/)
+    * [ ] A `_webpack.default.js` file ready to create the next stage configuration
+
+Your configuration can:
+  * [ ] Bundle JavaScript files
+  * [ ] Automatically install and save your missing dependencies
 
 # Getting Started
 
@@ -24,7 +46,7 @@ Instead, a [webpack plugin](https://www.npmjs.com/package/npm-install-webpack-pl
 npm install --save-dev npm-install-webpack-plugin
 ```
 
-# Create a basic configuration
+# Creating a basic configuration
 
 Webpack configuration is define through a **JavaScript Object**. The first step to learn how to use Webpack is to get familiar with the configuration options of Webpack.
 
@@ -61,7 +83,7 @@ let webpack_base = {
     // Here the application starts executing and webpack starts bundling
 
   output: {
-    path: config.output.path, // string
+    path: path.resolve(process.cwd(), config.output.path), // string
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
 
@@ -90,9 +112,49 @@ The minimum configuration is to define the `entry` and an `output`, so lets expl
 
 ### Entry
 
+The entry can be a **string** defining the **path** of the JavaScript file you want to bundle.
+
+```
+entry: 'src/js/app.js'
+```
+
+You can also provide an **array** defining the list of files you want to bundles
+
+```
+entry: [
+  'src/js/app1.js',
+  'src/js/app2.js',
+]
+```
+
+Finally you can provide an **Object** and this method you need to focus on, because it allow you to correctly define your bundles:
+
+```
+entry: {
+  bundle1 : [
+    //list of entry files for the bundle1
+  ],
+  bundle2 : [
+    //list of entry files for the bundle2
+  ]
+}
+```
+
 ### Output
 
-## Install a plugin
+There are two important properties:
+
+* path, **absolute path** to the directory you want to output your generated files.
+  However you don't want to hard code the absolute path, otherwise you configuration will not work on another computer.
+
+  Here is the solution:
+  ```
+    path.resolve(process.cwd(), config.output.path)
+  ```
+  `path.resolve(a,b)` provide us the absolute path of `b` relative to `a`. We get the absolute path from where we ran our command line with `process.cwd()` and we define we in `config.js` the relative path to our output folder
+* filename, a rule to define how to name our output files
+
+## Installing a plugin
 
 In the first section I told you that we will be using a special plugin to `npm install` our modules. Here is how to bind a plugin to Webpack.
 
@@ -108,6 +170,8 @@ In the first section I told you that we will be using a special plugin to `npm i
     new NpmInstallPlugin();
   ],
   ```
+
+I thing it can not be more simple.
 
 ## Running Webpack
 
@@ -133,32 +197,32 @@ The line in question define the command line `npm run base`. This command is cal
 
 Great! We have a working configuration of Webpack that we can run with the command line `npm run base`. **But the question is What does Webpack concretely do ?**. (first make sure you are aware of the concept of[modules for node.js](https://nodejs.org/api/modules.html))
 
-* 1- Create a file called `src/js/app.js` containing:
+1. Create a file called `src/js/app.js` containing:
 
-```
-var s = require('./hello.js');
+  ```
+  var s = require('./hello.js');
 
-console.log(s)
+  console.log(s)
 
-```
+  ```
 
-You notice that we are using `require` to use another file inside our js file and so define the dependencies between both files.
+  You notice that we are using `require` to use another file inside our js file and so define the dependencies between both files.
 
-* 2- Create a file called `src/js/hello.js` containing:
+2. Create a file called `src/js/hello.js` containing:
 
-```
-module.exports = 'Hello world!';
-```
+  ```
+  module.exports = 'Hello world!';
+  ```
 
-* 3- modify the configuration as following because we want to work in the current directory.
+3. modify the configuration as following because we want to work in the current directory.
 
-```
-const context = './' // Where does project located relatively to the assets-pipeline-Webpack folder -> Current directory
-```
+  ```
+  const context = './' // Where does project located relatively to the assets-pipeline-Webpack folder -> Current directory
+  ```
 
-* 4- run the command line `npm run base`
+4. run the command line `npm run base`
 
-* 5- look at the `./dist` directory
+5. look at the `./dist` directory
 
 **What happend ?**
 
@@ -168,4 +232,38 @@ Webpack has translated your "node.js" code which was using the concept of module
 
 We will be discovering those things in the next stages.
 
-# Conclusion
+## Preparing the next stage configuration
+
+I told you at the beginning that `webpack.base.js` will be our base configuration and I mentionned that we will be programmatically extending this file to create extra configuration such as development and production.
+
+Thus we will define a boilerplate called `_webpack.default.js`. (the underscore let the file be on the top of the files list, so it is easy to find).
+
+Here is the content of this file:
+
+```javascript
+'use strict'
+
+//we need webpack
+const webpack = require('webpack')
+// we need our base configuration
+const webpack_base = require('./webpack.base')
+// we need out config variable file
+const config = require('../config')
+
+// here you can edit the webpack_base object
+// to addapt the configuration to your use case
+
+// we export the result of our configuration
+module.exports = webpack_base
+
+```
+
+## Conclusion
+
+1. **Check our Road Map**
+
+2. Learn more about the Plugins and loasers we installed
+
+| Plugin | Description |
+|--|--|
+| [npm-install-webpack-plugin](https://github.com/webpack-contrib/npm-install-webpack-plugin) | speed up development by automatically installing & saving dependencies with Webpack.|
