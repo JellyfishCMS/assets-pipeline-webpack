@@ -1,5 +1,13 @@
 # WEBPACK configuration stage 0
 
+* Getting Started
+* Create a basic configuration
+  * Directory structure
+  * Configuration file
+* Install a plugin
+* Running Webpack
+* Conclusion
+
 # Getting Started
 
 As always with node.js we will download our dependencies.
@@ -16,19 +24,23 @@ Instead, a [webpack plugin](https://www.npmjs.com/package/npm-install-webpack-pl
 npm install --save-dev npm-install-webpack-plugin
 ```
 
-# Define the basic Webpack configuration
+# Create a basic configuration
 
 Webpack configuration is define through a **JavaScript Object**. The first step to learn how to use Webpack is to get familiar with the configuration options of Webpack.
 
 You can refer to the [offical documentation](https://Webpack.js.org/configuration/)
 
-The _jellyfish-assets-pipeline-webpack_ project contain at this stage a standard pre-configure **JavaScript Object** in the file called `webpack.base.js`.
+## Directory structure
 
-The idea is that this file would be the same for all our future Webpack configuration. When creating a new configuration we would create a new JavaScript file such as `webpack.default.js` and programmatically modify the **JavaScript Object** provided by the `webpack.base.js` file. (We will see how in details in the next Stage of this tutorial).
+This _jellyfish-assets-pipeline-webpack_ project contain at this stage a standard pre-configure **JavaScript Object** in the file called `webpack.base.js`.
+
+The idea is that this file will be the same for all our future Webpack configuration. We will creating more specific configuration by extending this file.
+
+When creating a new configuration we would create a new JavaScript file such as `webpack.default.js` and programmatically modify the **JavaScript Object** provided by the `webpack.base.js` file. __We will see how in details in the next Stage of this tutorial__.
 
 In addition to that, we will be using a `config.js` file to define some global variable for our Webpack configuration.
 
-This is our file tree structure:
+As a result our file tree structure look like this:
 
 ```
 +- documentation
@@ -39,6 +51,8 @@ This is our file tree structure:
 `+- config.js             // Used to define our VARIABLES
 ```
 
+## Configuration file
+
 So now you should have a serious look at `webpack.base.js`, and focus your attention on this part of the configuration:
 
 ```javascript
@@ -47,14 +61,14 @@ let webpack_base = {
     // Here the application starts executing and webpack starts bundling
 
   output: {
-    path: config.output_path, // string
+    path: config.output.path, // string
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
 
     filename: config.debug ? '[name].js' : '[name].[chunkhash:8].js', // string
     // the filename template for our bundles
 
-    publicPath: config.output_publicPath, // strin
+    publicPath: config.output.publicPath, // string
     // the url to the output directory resolved relative to the HTML page
 
     //library: "MyLibrary", // string
@@ -72,7 +86,11 @@ let webpack_base = {
 }
 ```
 
-This is how Webpack wants you to define the inputs and outputs of your application. In order to make those easy to access we have created variables in our `config.js`.
+The minimum configuration is to define the `entry` and an `output`, so lets explain those two configuration element. We want Webpack to do even more stuff so there is a tones of other configuration elements. In order to make those easy to access you noticed that we have variables in our `config.js`, because the path between our project can change quite often but not the rest of the configuration.
+
+### Entry
+
+### Output
 
 ## Install a plugin
 
@@ -149,3 +167,5 @@ You have now a bundled JavaScript file browser ready.
 Webpack has translated your "node.js" code which was using the concept of modules into a javascript file that can be use browser. Being capable of using modules to manage JavaScript dependencies is great, however it is fare from a true bundle. There is so much more that Webpack can do for you.
 
 We will be discovering those things in the next stages.
+
+# Conclusion

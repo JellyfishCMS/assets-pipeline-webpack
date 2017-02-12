@@ -16,14 +16,14 @@ let webpack_base = {
     // Here the application starts executing and webpack starts bundling
 
   output: {
-    path: config.output_path, // string
+    path: config.output.path, // string
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
 
     filename: config.debug ? '[name].js' : '[name].[chunkhash:8].js', // string
     // the filename template for our bundles
 
-    publicPath: config.output_publicPath, // strin
+    publicPath: config.output.publicPath, // strin
     // the url to the output directory resolved relative to the HTML page
 
     //library: "MyLibrary", // string
