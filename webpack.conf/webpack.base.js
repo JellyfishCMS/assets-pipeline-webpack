@@ -3,7 +3,10 @@ const path = require('path')
 const webpack = require('webpack')
 
 // configuration file
-const config = require('./config')
+const config = require('../config')
+
+// plugins
+const NpmInstallPlugin = require('npm-install-webpack-plugin')
 
 /**
 ** WEBPACK configuration object
@@ -18,7 +21,7 @@ let webpack_base = {
     // must be an absolute path (use the Node.js path module)
 
     filename: config.debug ? '[name].js' : '[name].[chunkhash:8].js', // string
-    // the filename template for entry chunks
+    // the filename template for our bundles
 
     publicPath: config.output_publicPath, // strin
     // the url to the output directory resolved relative to the HTML page
@@ -34,7 +37,11 @@ let webpack_base = {
   },
     // options related how webpack emits results
 
-  module: {},
+  module: {
+    rules: [
+      { test: /\.css$/, loader: "style-loader" }
+    ]
+  },
     // modules and loaders
 
   resolve: {
@@ -78,7 +85,11 @@ let webpack_base = {
   devServer: {},
     //This set of options is picked up by webpack-dev-server and can be used to change it's behavior in various ways.
 
-  plugins: [],
+  watch: true,
+
+  plugins: [
+    new NpmInstallPlugin()
+  ],
     // list of additional plugins
 }
 

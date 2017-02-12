@@ -1,14 +1,30 @@
 # WEBPACK configuration stage 0
 
-## Define the basic Webpack configuration
+# Getting Started
 
-Webpack configuration is define through a **JavaScript Object**. The first step to learn how to use webpack is to get familiar with the configuration options of webpack.
+As always with node.js we will download our dependencies.
 
-You can refer to the [offical documentation](https://webpack.js.org/configuration/)
+```
+npm i webpack --save-dev
+```
+
+It sucks to stop webpack and all our scripts just to `npm install` a dependency you didn't know you needed until now.
+
+Instead, a [webpack plugin](https://www.npmjs.com/package/npm-install-webpack-plugin) let us use require or import how you normally would and `npm install` will happen automatically to install & save missing dependencies while you work!
+
+```
+npm install --save-dev npm-install-webpack-plugin
+```
+
+# Define the basic Webpack configuration
+
+Webpack configuration is define through a **JavaScript Object**. The first step to learn how to use Webpack is to get familiar with the configuration options of Webpack.
+
+You can refer to the [offical documentation](https://Webpack.js.org/configuration/)
 
 The _jellyfish-assets-pipeline-webpack_ project contain at this stage a standard pre-configure **JavaScript Object** in the file called `webpack.base.js`.
 
-The idea is that this file would be the same for any of our future webpack configuration. When creating a new configuration we would create a new JavaScript file such as `webpack.default.js` and programmatically modify the **JavaScript Object** provided by the `webpack.base.js` file. (We will see how in details in the next Stage of this tutorial).
+The idea is that this file would be the same for all our future Webpack configuration. When creating a new configuration we would create a new JavaScript file such as `webpack.default.js` and programmatically modify the **JavaScript Object** provided by the `webpack.base.js` file. (We will see how in details in the next Stage of this tutorial).
 
 In addition to that, we will be using a `config.js` file to define some global variable for our Webpack configuration.
 
@@ -16,14 +32,66 @@ This is our file tree structure:
 
 ```
 +- documentation
-+- webpack.conf           // Contains all the available webpack configurations
++- webpack.conf           // Contains all the available Webpack configurations
+|`+- webpack.base.js        // Our default Webpack configuration Object
+| +- webpack.default.js     // Blank Webpack configuration that we will use as a template for the future configurations
+| +- ...                    // Another Webpack configuration file
 `+- config.js             // Used to define our VARIABLES
- +- webpack.base.js       // Our default Webpack configuration Object
- +- webpack.default.js    // Blank Webpack configuration that we will use as a template for the future configurations
- +- ...                   // Another webpack configuration file
 ```
 
-## Running webpack
+So now you should have a serious look at `webpack.base.js`, and focus your attention on this part of the configuration:
+
+```javascript
+let webpack_base = {
+  entry: config.entry, // string | array | object
+    // Here the application starts executing and webpack starts bundling
+
+  output: {
+    path: config.output_path, // string
+    // the target directory for all output files
+    // must be an absolute path (use the Node.js path module)
+
+    filename: config.debug ? '[name].js' : '[name].[chunkhash:8].js', // string
+    // the filename template for our bundles
+
+    publicPath: config.output_publicPath, // strin
+    // the url to the output directory resolved relative to the HTML page
+
+    //library: "MyLibrary", // string
+    // the name of the exported library
+
+    //libraryTarget: "umd", // enum
+    // the type of the exported library
+
+    /* Advanced output configuration (see: https://webpack.js.org/configuration/) */
+
+  },
+
+  [...]
+
+}
+```
+
+This is how Webpack wants you to define the inputs and outputs of your application. In order to make those easy to access we have created variables in our `config.js`.
+
+## Install a plugin
+
+In the first section I told you that we will be using a special plugin to `npm install` our modules. Here is how to bind a plugin to Webpack.
+
+1. require your plugin/module
+
+  ```
+  const NpmInstallPlugin = require('npm-install-webpack-plugin')
+  ```
+2. Add it to the plugin list in your `webpack.base.js`
+
+  ```
+  plugins: [
+    new NpmInstallPlugin();
+  ],
+  ```
+
+## Running Webpack
 
 Now it is time to see what Webpack is capable of at this stage. We will be Running our script with npm, so lets have a look to the `package.json` file. In the script section you should see this:
 
@@ -67,7 +135,7 @@ module.exports = 'Hello world!';
 * 3- modify the configuration as following because we want to work in the current directory.
 
 ```
-const context = './' // Where does project located relatively to the assets-pipeline-webpack folder -> Current directory
+const context = './' // Where does project located relatively to the assets-pipeline-Webpack folder -> Current directory
 ```
 
 * 4- run the command line `npm run base`
@@ -78,6 +146,6 @@ const context = './' // Where does project located relatively to the assets-pipe
 
 You have now a bundled JavaScript file browser ready.
 
-Webpack has translated your "node.js" code which was using the concept of modules into a javascript file that can be use browser. Being capable of using modules to manage JavaScript dependencies is great, however it is fare from a true bundle. There is so much more that webpack can do for you.
+Webpack has translated your "node.js" code which was using the concept of modules into a javascript file that can be use browser. Being capable of using modules to manage JavaScript dependencies is great, however it is fare from a true bundle. There is so much more that Webpack can do for you.
 
 We will be discovering those things in the next stages.
