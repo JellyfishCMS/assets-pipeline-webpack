@@ -1,4 +1,4 @@
-const context = '../../jellyfish-themes/jellyfish-tests/' // Where does your project is located relatively to the assets-pipeline-webpack folder?
+const context = '../../jellyfish-themes/jellyfish-tests' // Where does your project is located relatively to the assets-pipeline-webpack folder?
 
 module.exports = {
 
@@ -14,7 +14,7 @@ module.exports = {
   ****************************/
   entry: {                                                // Where are the entry point files of your application?
     app: [                                                // You can define several bundle
-      context + 'src/js/app.js'
+      context + '/src/js/app.js'
     ]
   },
 

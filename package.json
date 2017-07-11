@@ -29,7 +29,7 @@
   "homepage": "https://gitlab.com/xNok/jellyfish#README",
   "dependencies": {},
   "devDependencies": {
-    "npm-install-webpack-plugin": "^4.0.4",
+    "npm-install-webpack2-plugin": "^5.0.1",
     "webpack": "^2.2.1"
   }
 }
