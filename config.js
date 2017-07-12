@@ -1,4 +1,5 @@
-const context = '../../jellyfish-themes/jellyfish-tests' // Where does your project is located relatively to the assets-pipeline-webpack folder?
+const context = './' // Where does your project is located?
+                     // (relatively to the assets-pipeline-webpack folder)
 
 module.exports = {
 
@@ -6,21 +7,21 @@ module.exports = {
   ** ENVIRONNEMENT VARIABLES
   ****************************/
   debug: process.env.NODE_ENV === 'development',
-  port: 3003,                                             // which port to use when serving your files?
-  target: 'web',                                          // What is the target of your application?
+  port: 3003,                    // which port to use when serving your files?
+  target: 'web',                 // What is the target of your application?
 
   /**
   ** APPLIATION I/O
   ****************************/
-  entry: {                                                // Where are the entry point files of your application?
-    app: [                                                // You can define several bundle
+  entry: {                       // Where are the entry point files of your application?
+    app: [                       // You can define several bundle (defaul bundle: app)
       context + '/src/js/app.js'
     ]
   },
 
   output: {
-    path: context + '/dist',                              // Where do you want to generate output files?
-    publicPath: '/dist/',                                 // How to access to the output_path relatively to the HTML page?
+    path: context + '/dist',     // Where do you want to generate output files?
+    publicPath: '/dist/',        // How to access to the output_path relatively to the HTML page?
   }
 
   /**

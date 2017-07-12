@@ -16,7 +16,7 @@ let webpack_base = {
     //> Here the application starts executing and webpack starts bundling
 
   output: {
-    path: path.resolve(config.output.path), // string
+    path: path.resolve(process.cwd(),config.output.path), // string
       //> the target directory for all output files
       //> must be an absolute path (use the Node.js path module)
 

@@ -1,9 +1,9 @@
-# WEBPACK configuration stage 0
+# WEBPACK CONFIGURATION STAGE 0
 
 * Getting Started
 * Creating a basic configuration
-  * Directory structure
-  * Configuration file
+  * Splitting the configuration
+  * Creating a simple Configuration file
 * Installing a plugin
 * Running Webpack
 * Preparing the next stage configuration
@@ -11,39 +11,31 @@
 
 ## Road Map
 
-At this stage you know:
+At this stage you will learn:
 
 * [ ] How to install webpack
-* [ ] How to define a default configuration file
+* [ ] How to define a basic configuration file
   * [ ] How to define the entry point of your bundles
   * [ ] How to define the output folder
   * [ ] How to Add a plugin to your configuration
 * [ ] create a npm shortcut to run webpack via `npm run base`
 
-Your configuration has:
+Your configuration will contains:
   * [ ] A `config.js` file with all the variable that you migh change from one project to another
   * [ ] A `webpack.conf` folder with all you configuration files
-    * [ ] A `webpack.base.js` file that have a pre-configured and commented webpack configuration object inspired from [the official documentation](https://webpack.js.org/configuration/)
+    * [ ] A `webpack.base.js` file with a pre-configured and commented webpack configuration inspired from [the official documentation](https://webpack.js.org/configuration/)
     * [ ] A `_webpack.default.js` file ready to create the next stage configuration
 
-Your configuration can:
+Your configuration will be able to:
   * [ ] Bundle JavaScript files
   * [ ] Automatically install and save your missing dependencies
 
 # Getting Started
 
-As always with node.js we will download our dependencies.
+As always, we will download our dependencies with [node.js](https://nodejs.org/en/) .
 
 ```
 npm i webpack --save-dev
-```
-
-It sucks to stop webpack and all our scripts just to `npm install` a dependency you didn't know you needed until now.
-
-Instead, a [webpack plugin](https://www.npmjs.com/package/npm-install-webpack-plugin) let us use require or import how you normally would and `npm install` will happen automatically to install & save missing dependencies while you work!
-
-```
-npm install --save-dev npm-install-webpack-plugin
 ```
 
 # Creating a basic configuration
@@ -52,17 +44,23 @@ Webpack configuration is define through a **JavaScript Object**. The first step 
 
 You can refer to the [offical documentation](https://Webpack.js.org/configuration/)
 
-## Directory structure
+## Splitting the configuration
+
+> Divide and rule
+
+We aim to create a configuration that is as modular as possible by dividing the configuration in several files according to their purpose.
 
 This _jellyfish-assets-pipeline-webpack_ project contain at this stage a standard pre-configure **JavaScript Object** in the file called `webpack.base.js`.
 
 The idea is that this file will be the same for all our future Webpack configuration. We will creating more specific configuration by extending this file.
 
-When creating a new configuration we would create a new JavaScript file such as `webpack.default.js` and programmatically modify the **JavaScript Object** provided by the `webpack.base.js` file. __We will see how in details in the next Stage of this tutorial__.
+When creating a new configuration we would create a new JavaScript file and programmatically modify the **JavaScript Object** provided by the `webpack.base.js` file. `webpack.default.js` is a template for those new configuration. __We will see how in details in the next Stage of this tutorial__.
 
-In addition to that, we will be using a `config.js` file to define some global variable for our Webpack configuration.
+All our configuration files will be stored in a folder called `webpack.conf`.
 
-As a result our file tree structure look like this:
+In addition, we will be using a `config.js` file to define some global variable for our Webpack configuration.
+
+As a result, our file tree structure look like this:
 
 ```
 +- documentation
@@ -108,7 +106,9 @@ let webpack_base = {
 }
 ```
 
-The minimum configuration is to define the `entry` and an `output`, so lets explain those two configuration element. We want Webpack to do even more stuff so there is a tones of other configuration elements. In order to make those easy to access you noticed that we have variables in our `config.js`, because the path between our project can change quite often but not the rest of the configuration.
+The minimum required configuration is defining the `entry` and an `output` of your applicationx thus we will dedicate the next two section to it.
+
+Given that the `entry` and the `output` chnage from project to project. We want to make those easy to access so we use  `config.js` to stored there value.
 
 ### Entry
 
@@ -127,7 +127,7 @@ entry: [
 ]
 ```
 
-Finally you can provide an **Object** and this method you need to focus on, because it allow you to correctly define your bundles:
+Finally you can provide an **Object** and this is the method you need to focus on, because it allow you to correctly define your bundles:
 
 ```
 entry: {
@@ -145,20 +145,35 @@ entry: {
 There are two important properties:
 
 * path, **absolute path** to the directory you want to output your generated files.
-  However you don't want to hard code the absolute path, otherwise you configuration will not work on another computer.
+  However you don't want to hard code the absolute path, otherwise you configuration will not work on another computers.
 
   Here is the solution:
-  ```
-    path.resolve(process.cwd(), config.output.path)
+  ```js
+  path.resolve(process.cwd(), config.output.path)
   ```
   `path.resolve(a,b)` provide us the absolute path of `b` relative to `a`. We get the absolute path from where we ran our command line with `process.cwd()` and we define we in `config.js` the relative path to our output folder
 * filename, a rule to define how to name our output files
 
+  ```js
+  filename: config.debug ? '[name].js' : '[name].[chunkhash:8].js'
+  ```
+  this is a good example. In developemt (`config.debug` set to true) the output file will not change (app.js in input app.js as an output) and so every time you run webpack you will overide the previous file, however in production the fille name will get a hash of 8 character will be added so you do not override you previous module version.
+
 ## Installing a plugin
 
-In the first section I told you that we will be using a special plugin to `npm install` our modules. Here is how to bind a plugin to Webpack.
+It sucks to stop webpack and all our scripts just to `npm install` a dependency you didn't know you needed until now.
 
-1. require your plugin/module
+Instead, a [webpack plugin](https://www.npmjs.com/package/npm-install-webpack-plugin) automatically triggered `npm install` when you need it whithout interepting webpack.
+
+First, install the pugin via npm.
+
+```
+npm install --save-dev npm-install-webpack2-plugin
+```
+
+Second, reference this plugin in your wbpack configuration.
+
+1. require your plugin/module on top of `webpack.base.js`
 
   ```
   const NpmInstallPlugin = require('npm-install-webpack-plugin')
@@ -175,7 +190,7 @@ I thing it can not be more simple.
 
 ## Running Webpack
 
-Now it is time to see what Webpack is capable of at this stage. We will be Running our script with npm, so lets have a look to the `package.json` file. In the script section you should see this:
+Now it is time to see what Webpack is capable of (at this stage). We will be Running our script with npm, so lets have a look to the `package.json` file. In the script section you should see this:
 
 ```
 "scripts": {
@@ -186,16 +201,17 @@ Now it is time to see what Webpack is capable of at this stage. We will be Runni
 },
 ```
 
-The only line that actually does something is the following:
+The only line that does something (at the moment) is the following:
 
 ```
 "base": "webpack --config webpack.conf/webpack.base.js",
 ```
 
-The other are just there to spoil a bit what we will be doing on the next stages.
 The line in question define the command line `npm run base`. This command is calling `webpack` and give the path of our configuration through the flag `--config`. Pretty simple isn't it?
 
-Great! We have a working configuration of Webpack that we can run with the command line `npm run base`. **But the question is What does Webpack concretely do ?**. (first make sure you are aware of the concept of[modules for node.js](https://nodejs.org/api/modules.html))
+The other are just there to spoil a bit what we will be doing on the next stages.
+
+Great! We have a working configuration of Webpack that we can run with the command line `npm run base`. **But the question is What does Webpack concretely do ?**.
 
 1. Create a file called `src/js/app.js` containing:
 
