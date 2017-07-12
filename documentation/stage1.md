@@ -1,10 +1,29 @@
-# Webpack configuration stage 1
+# WEBPACK CONFIGURATION STAGE 0
 
 By defaut Webpack only manage javascript files, however a module systems called loaders let you go further by including other type of files in your modules (html, css, less, sass, jade, etc.)
 
+## Road Map
+
+At this stage you will learn:
+
+* [ ] How to add and configure several loaders
+
+Your configuration will contains:
+    * [ ] A improved version of `webpack.base.js`
+    * [ ] A `webpack.mod` containing loader configuration
+      * [ ] A `_default-loader.js` file, a boilerplate for loaders configuartions
+      * [ ] A `_babel-loader.js` file, loader configuration for ES6
+      * [ ] A `_css-loader.js` file, loader configuration for CSS      
+      * [ ] A `_image-loader.js` file, loader configuration for imagess
+      * [ ] A `_sass-loader.js` file, loader configuration for SASS/SCSS
+
+Your configuration will be able to:
+  * [ ] Bundle JavaScript, Css, images, and Sass files
+  * [ ] Automatically install and save your missing dependencies
+
 ## Loaders
 
-Webpack possess a systems called `loaders` that allow you to load other type of files than JavaScript.
+Webpack posses a systems called `loaders` that allow you to load other type of files than JavaScript.
 
 * First, find the loader you need either on [this page](https://github.com/webpack/webpack) or on [npm](https://www.npmjs.com/)
 
@@ -87,3 +106,16 @@ As a result we will **define two configurations**:
 
 * **A development configuration** with webpack-dev-server
 * **A Production configuration** that will publish and optimize our assets
+
+## Conclusion
+
+1. **Check our Road Map**
+
+2. Learn more about the Plugins and loaders we installed
+
+| Plugin | Description |
+|--|--|
+| [babel-loader](https://github.com/babel/babel-loader) | Use the newest version of JavaScript and be sure the generated code will be compatible with all webbrowsers |
+| [css-loader](https://github.com/webpack-contrib/css-loader) | Include CSS in your module |
+| [images-loader](https://github.com/thetalecrafter/img-loader) | Image minimizing loader for webpack 2 |
+| [sass-loader](https://github.com/webpack-contrib/sass-loader) | Loads a SASS/SCSS file and compiles it to CSS. |
